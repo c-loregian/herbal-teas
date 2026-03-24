@@ -275,32 +275,17 @@
       line-height: 1.7;
     }
 
-    /* ── SUCCESS ── */
-    .success-state {
-      display: none;
-      text-align: center;
-      padding: 8px 0 4px;
+    /* ── HIDDEN / PAGE TRANSITION ── */
+    .hidden { display: none !important; }
+
+    .ty-animate {
+      opacity: 0;
+      animation: fadeUp 0.8s ease forwards;
     }
 
-    .success-state.visible { display: block; }
-    .form-fields.hidden { display: none; }
-
-    .success-icon { font-size: 30px; margin-bottom: 12px; display: block; }
-
-    .success-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 26px;
-      font-weight: 400;
-      font-style: italic;
-      color: var(--ink);
-      margin-bottom: 8px;
-    }
-
-    .success-body {
-      font-size: 13px;
-      color: var(--ink-soft);
-      line-height: 1.75;
-    }
+    .ty-animate:nth-child(3) { animation-delay: 0.1s; }
+    .ty-animate:nth-child(4) { animation-delay: 0.25s; }
+    .ty-animate:nth-child(5) { animation-delay: 0.4s; }
 
     /* ── ERROR ── */
     .error-msg {
@@ -350,7 +335,8 @@
     <div class="leaf">🌼</div>
   </div>
 
-  <div class="page">
+  <!-- LANDING PAGE -->
+  <div class="page" id="landingPage">
     <div class="container">
 
       <div class="top-rule">
@@ -359,34 +345,18 @@
         <div class="rule-line"></div>
       </div>
 
-      <p class="eyebrow">Free Guide — Jenni Mae Wellness</p>
+      <p class="eyebrow">Jenni Mae Wellness</p>
 
       <h1 class="headline">
-        7 Herbal Teas That<br><em>Ease PMS Naturally</em>
+        Herbal Teas for<br><em>Hormonal Harmony</em>
       </h1>
 
       <p class="subheadline">
-        A gentle, evidence-backed guide to the teas that actually work — and the one thing most women get wrong when brewing them
+        Nature's most nurturing brews to ease PMS symptoms, support hormone balance, and bring your body back to calm
       </p>
 
-      <div class="preview-card">
-        <p class="preview-label">What's inside the free guide</p>
-        <ul class="tea-list">
-          <li><span class="tea-name">Raspberry Leaf</span> — cramps &amp; muscle tension</li>
-          <li><span class="tea-name">Chamomile</span> — anxiety, sleep &amp; pain</li>
-          <li><span class="tea-name">Ginger</span> — bloating &amp; inflammation</li>
-          <li><span class="tea-name">Vitex</span> — hormone regulation</li>
-          <li><span class="tea-name">Peppermint</span> — bloating &amp; fatigue</li>
-          <li><span class="tea-name">Lemon Balm</span> — mood &amp; nervous system</li>
-          <li><span class="tea-name">Dandelion Root</span> — water retention &amp; liver</li>
-        </ul>
-        <p class="preview-bonus">
-          Plus: <strong>why most tea bags make your hormones worse</strong> — the microplastic truth no one talks about, and what to use instead
-        </p>
-      </div>
-
       <div class="form-card">
-        <span class="form-label">Send me the free guide</span>
+        <span class="form-label">Get the free guide</span>
 
         <div class="form-fields" id="formFields">
           <div class="input-row">
@@ -395,22 +365,13 @@
           </div>
 
           <button class="submit-btn" id="submitBtn" onclick="handleSubmit()">
-            Get the Free Guide Now
+            Send Me the Free Guide
           </button>
 
           <p class="error-msg" id="errorMsg">Something went wrong. Please try again.</p>
 
           <p class="privacy-note">
             Delivered instantly to your inbox. No spam, ever. Unsubscribe anytime.
-          </p>
-        </div>
-
-        <div class="success-state" id="successState">
-          <span class="success-icon">🌿</span>
-          <p class="success-title">Check your inbox.</p>
-          <p class="success-body">
-            Your free herbal tea guide is on its way.<br>
-            In the meantime — start with raspberry leaf and chamomile.
           </p>
         </div>
       </div>
@@ -422,7 +383,49 @@
     </div>
   </div>
 
+  <!-- THANK YOU PAGE -->
+  <div class="page hidden" id="thankYouPage">
+    <div class="container">
+
+      <div class="top-rule" style="opacity:1;">
+        <div class="rule-line"></div>
+        <div class="rule-dot"></div>
+        <div class="rule-line"></div>
+      </div>
+
+      <p class="eyebrow" style="opacity:1;">Jenni Mae Wellness</p>
+
+      <h1 class="headline ty-animate" style="font-size: clamp(34px, 6vw, 52px);">
+        Your guide is<br><em>ready to read</em>
+      </h1>
+
+      <p class="subheadline ty-animate" style="margin-bottom: 32px;">
+        Thank you for signing up. Click below to download your free copy of <em>Herbal Teas for Hormonal Harmony</em>.
+      </p>
+
+      <div class="form-card ty-animate" style="text-align: center;">
+        <span class="success-icon" style="display:block; font-size:32px; margin-bottom:14px;">🌿</span>
+        <p style="font-family: 'Cormorant Garamond', serif; font-size: 13px; font-weight: 300; font-style: italic; color: var(--ink-soft); margin-bottom: 24px; line-height: 1.7;">
+          Your guide covers 7 evidence-backed herbal teas for PMS relief, the science behind each one, how to brew them, and why most tea bags are quietly making your hormones worse.
+        </p>
+        <a class="submit-btn" id="downloadBtn" href="#" download style="display:flex; align-items:center; justify-content:center; text-decoration:none;">
+          Download the Free Guide
+        </a>
+        <p class="privacy-note" style="margin-top: 16px;">
+          A copy is also on its way to your inbox now.
+        </p>
+      </div>
+
+      <div class="footer" style="opacity:1;">
+        <p>© 2025 Jenni Mae Wellness &nbsp;·&nbsp; Hormone health for women</p>
+      </div>
+
+    </div>
+  </div>
+
   <script>
+    const PDF_URL = 'https://drive.google.com/uc?export=download&id=1ztLh7ouhHO8WxsYH9wKhT9AMoUuJNGdO';
+
     async function handleSubmit() {
       const firstName = document.getElementById('firstName').value.trim();
       const email     = document.getElementById('email').value.trim();
@@ -452,20 +455,21 @@
             signed_up_at: new Date().toISOString()
           })
         });
-
-        document.getElementById('formFields').classList.add('hidden');
-        document.getElementById('successState').classList.add('visible');
-
       } catch (err) {
-        btn.classList.remove('loading');
-        btn.textContent = 'Get the Free Guide Now';
-        errorMsg.textContent = 'Something went wrong. Please try again.';
-        errorMsg.classList.add('visible');
+        // still show thank you even if webhook fails
       }
+
+      // Set download link and show thank you page
+      document.getElementById('downloadBtn').href = PDF_URL;
+      document.getElementById('landingPage').classList.add('hidden');
+      document.getElementById('thankYouPage').classList.remove('hidden');
+      window.scrollTo(0, 0);
     }
 
-    document.getElementById('email').addEventListener('keydown', e => {
-      if (e.key === 'Enter') handleSubmit();
+    document.addEventListener('DOMContentLoaded', () => {
+      document.getElementById('email').addEventListener('keydown', e => {
+        if (e.key === 'Enter') handleSubmit();
+      });
     });
   </script>
 
